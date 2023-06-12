@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículum</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 5px;
+    }
+
+    .list li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: #1E3D58;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .list li:hover {
+      background-color: #F4F4F4;
+    }
+
+    .list li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: #1E3D58;
+      font-size: 12px;
+      line-height: 1;
+      transition: color 0.3s;
+    }
+
+    .list li:hover::before {
+      color: #7EA3BD;
+    }
+
+    .list li:nth-child(odd)::before {
+      content: "\25CF";
+      /* Círculo sólido */
+    }
+
+    .list li:nth-child(even)::before {
+      content: "\25A0";
+      /* Cuadrado sólido */
+    }
+
+    .list li {
+      transition: background-color 0.3s;
+    }
+
+    .list li:hover {
+      background-color: #F4F4F4;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e6f0ff;
+      /* Fondo azul ligeramente más oscuro */
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      position: relative;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #293241;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      /* Aumentamos la separación */
+      position: relative;
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-weight: bold;
+    }
+
+    h1::before,
+    h2::before,
+    h3::before {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 2px;
+      background-color: #1E3D58;
+      opacity: 0.5;
+    }
+
+    h1::after,
+    h2::after,
+    h3::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #1E3D58;
+      opacity: 0.2;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    h1:hover::after,
+    h2:hover::after,
+    h3:hover::after {
+      transform: scaleX(1);
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 15px;
+      /* Aumentamos la separación */
+    }
+
+    .section {
+      margin-bottom: 50px;
+      /* Aumentamos la separación */
+    }
+
+    .section-title {
+      font-size: 24px;
+      padding-bottom: 5px;
+      display: inline-block;
+      color: #1E3D58;
+      position: relative;
+    }
+
+    .section-title::before {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 4px;
+      background-color: #1E3D58;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    .experience {
+      margin-bottom: 30px;
+      /* Aumentamos la separación */
+    }
+
+    .experience-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      /* Aumentamos la separación */
+    }
+
+    .experience-description {
+      margin-top: 0;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .skill {
+      background-color: #1E3D58;
+      color: #fff;
+      font-size: 14px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .animated {
+      animation-duration: 1s;
+      animation-fill-mode: both;
+    }
+
+    .fade-in {
+      animation-name: fade-in;
+    }
+
+    .slide-up {
+      animation-name: slide-up;
+    }
+
+    .collapse-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .collapse-trigger {
+      cursor: pointer;
+    }
+
+    .collapse-trigger::before {
+      content: "+";
+      display: inline-block;
+      margin-right: 5px;
+      transition: transform 0.3s;
+    }
+
+    .collapse-trigger.collapsed::before {
+      transform: rotate(45deg);
+    }
+
+    .photo-frame {
+      position: absolute;
+      top: 50px;
+      right: 30px;
+      /* Aumentamos la distancia a la derecha */
+      width: 160px;
+      /* Aumentamos el tamaño */
+      height: 160px;
+      /* Aumentamos el tamaño */
+      border: 10px solid #7EA3BD;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-frame:hover {
+      box-shadow: 0 0 10px 5px rgba(126, 163, 189, 0.8);
+      /* Cambiamos el efecto de sombra */
+      transform: scale(1.05);
+      /* Aumentamos el tamaño al pasar el cursor por encima */
+    }
+
+    .background-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-color: #e6f0ff;
+      /* Cambiamos el fondo a un color sólido */
+    }
+
+    .background-shapes:hover {
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        opacity: 0.1;
+      }
+
+      50% {
+        opacity: 0.2;
+      }
+
+      100% {
+        opacity: 0.1;
+      }
+    }
+
+    .stars {
+      display: inline-block;
+      font-size: 20px;
+      color: #bbbbbb;
+      transition: color 0.2s;
+    }
+
+    .stars:hover {
+      color: #ffd700;
+    }
+
+    .section-title {
+      margin-bottom: -50px;
+    }
+
+    .section-title {
+      margin-bottom: -50px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="background-shapes"></div>
+  <div class="container animated fade-in">
+    <h1>Mi Currículum</h1>
+
+    <div class="photo-frame">
+      <img src="file:///C:/Users/g2ale/OneDrive/Im%C3%A1genes/Alejandro.jpg" alt="Foto">
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Información Personal</h2>
+      <p><strong>Nombre:</strong> Alejandro González González</p>
+      <p><strong>Edad:</strong> 20 años</p>
+      <p><strong>Correo electrónico:</strong> g2.alejandro@icloud.com</p>
+      <p><strong>Teléfono:</strong> +34 611 474 285</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Experiencia Laboral</h2>
+      <div class="experience">
+        <h3 class="experience-title">Prácticas de Empresa</h3>
+        <p class="experience-description">Asesoría Aysar | Grado, Asturias | Abril - Junio del 2023</p>
+        <ul class="skills">
+          <li class="skill">Contabilidad</li>
+          <li class="skill">Archivo</li>
+          <li class="skill">Registro de Facturas y Bancos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Educación</h2>
+      <div class="experience">
+        <h3 class="experience-title">Técnico en Administración y Gestión</h3>
+        <p class="experience-description">IES Doctor Fleming | Oviedo, Asturias | 2022 - 2023</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Fortalezas</h2>
+      <ul class="list">
+        <li>Creatividad</li>
+        <li>Comunicación Asertiva</li>
+        <li>Resolución de problemas</li>
+        <li>Capacidad de aprendizaje rápido</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Habilidades</h2>
+      <ul class="list">
+        <li>Creatividad</li>
+        <li>Comunicación Asertiva</li>
+        <li>Resolución de problemas</li>
+        <li>Capacidad de aprendizaje rápido</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Idiomas</h2>
+      <ul class="list">
+        <li>Español (Nativo) <span class="stars">★★★★★</span></li>
+        <li>Inglés (Medio) <span class="stars">★★★☆☆</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const stars = document.querySelectorAll('.stars');
+
+    stars.forEach(star => {
+      star.addEventListener('click', function () {
+
+        photoFrame.addEventListener("mouseenter", () => {
+          photoFrame.style.boxShadow = "0 0 10px 5px rgba(126, 163, 189, 0.8)";
+          photoFrame.style.transform = "scale(1.05)";
+        });
+
+        photoFrame.addEventListener("mouseleave", () => {
+          photoFrame.style.boxShadow = "none";
+          photoFrame.style.transform = "scale(1)";
+        });
+      }
+      )
+    }
+    )
+  </script>
+</body>
+
+</html>
