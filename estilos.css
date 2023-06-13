@@ -103,12 +103,10 @@
       opacity: 0.5;
     }
 
-    h1::after,
-    h2::after,
-    h3::after {
+    .section-title::after {
       content: "";
       position: absolute;
-      bottom: -5px;
+      bottom: 5px;
       left: 0;
       width: 100%;
       height: 2px;
@@ -304,5 +302,5 @@
     }
 
     .section-title {
-      margin-bottom: -50px;
+      margin-bottom: 5px;
     }
